@@ -490,11 +490,11 @@ public class Lab3_CarlosRomero {
                 z = -1;
             }
         }
-        String adminitracion="";
+        String adminitracion = "";
         while (!adminitracion.equals("Salir")) {
-        String[] Y = {"Comprar", "Listar Productos", "Eliminar Productos", "Salir"};
-        adminitracion = (String) JOptionPane.showInputDialog(null, "Elija una opcion:", "Menú Administrativo", JOptionPane.DEFAULT_OPTION, null, Y, Y[0]);
-        
+            String[] Y = {"Comprar", "Listar Productos", "Eliminar Productos", "Salir"};
+            adminitracion = (String) JOptionPane.showInputDialog(null, "Elija una opcion:", "Menú Administrativo", JOptionPane.DEFAULT_OPTION, null, Y, Y[0]);
+
             if (adminitracion.endsWith(Y[0])) {
                 String m = "________________________________________Locales________________________________________\n";
                 for (Object t : locales) {
@@ -537,40 +537,50 @@ public class Lab3_CarlosRomero {
                     }
                 }
                 ((Clientes) personas.get(z)).getProductosComprados().add(locales.get(Pos).getProdutos().get(x));
+                locales.get(Pos).setContador(locales.get(Pos).getContador()+1);
+                locales.get(Pos).getVendidos().add(locales.get(Pos).getProdutos().get(x));
             }
-        if (adminitracion.endsWith(Y[1])) {
-            String m = "Productos del Cliente\n";
-            for (Object t : ((Clientes) personas.get(z)).getProductosComprados()) {
-                m += "" + ((Clientes) personas.get(z)).getProductosComprados().indexOf(t) + "" + ") \n" + t + "\n\n";
-            }
-            System.out.println(m);
-        }
-        if (adminitracion.equals(Y[2])) {
-            String m = "Productos del Cliente\n";
-            for (Object t : ((Clientes) personas.get(z)).getProductosComprados()) {
-                m += "" + ((Clientes) personas.get(z)).getProductosComprados().indexOf(t) + "" + ") \n" + t + "\n\n";
-            }
-            System.out.println(m);
-            int x = -1;
-            while (x == -1) {
-                try {
-                    x = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el producto a eliminar:"));
-                } catch (Exception e) {
-                    x = -1;
-                }
-            }
-            while (x > (((Clientes) personas.get(z)).getProductosComprados().size() - 1)) {
-                x = -1;
-                while (x == -1) {
-                    try {
-                        x = Integer.parseInt(JOptionPane.showInputDialog("Ese producto no existe!\nIngrese el producto a eliminar:"));
-                    } catch (Exception e) {
-                        x = -1;
+            if (adminitracion.equals(Y[1])) {
+                if ((((Clientes) personas.get(z)).getProductosComprados().size() - 1) < 0) {
+                    JOptionPane.showMessageDialog(null, "No ha comprado ");
+                } else {
+                    String m = "Productos del Cliente\n";
+                    for (Object t : ((Clientes) personas.get(z)).getProductosComprados()) {
+                        m += "" + ((Clientes) personas.get(z)).getProductosComprados().indexOf(t) + "" + ") \n" + t + "\n\n";
                     }
+                    System.out.println(m);
                 }
             }
-            ((Clientes) personas.get(z)).getProductosComprados().remove(x);
-        }
+            if (adminitracion.equals(Y[2])) {
+                if ((((Clientes) personas.get(z)).getProductosComprados().size() - 1) < 0) {
+                    JOptionPane.showMessageDialog(null, "No ha comprado ");
+                } else {
+                    String m = "Productos del Cliente\n";
+                    for (Object t : ((Clientes) personas.get(z)).getProductosComprados()) {
+                        m += "" + ((Clientes) personas.get(z)).getProductosComprados().indexOf(t) + "" + ") \n" + t + "\n\n";
+                    }
+                    System.out.println(m);
+                    int x = -1;
+                    while (x == -1) {
+                        try {
+                            x = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el producto a eliminar:"));
+                        } catch (Exception e) {
+                            x = -1;
+                        }
+                    }
+                    while (x > (((Clientes) personas.get(z)).getProductosComprados().size() - 1)) {
+                        x = -1;
+                        while (x == -1) {
+                            try {
+                                x = Integer.parseInt(JOptionPane.showInputDialog("Ese producto no existe!\nIngrese el producto a eliminar:"));
+                            } catch (Exception e) {
+                                x = -1;
+                            }
+                        }
+                    }
+                    ((Clientes) personas.get(z)).getProductosComprados().remove(x);
+                }
+            }
         }
     }
 
@@ -604,7 +614,7 @@ public class Lab3_CarlosRomero {
         }
         String menu = "";
         while (!menu.equals("Salir")) {
-            String[] z = {"Agregar Productos al Local", "Eliminar Productos del Local", "Modificar Productos del Local", "Listar Productos del Local", "Salir"};
+            String[] z = {"Agregar Productos al Local", "Eliminar Productos del Local", "Modificar Productos del Local", "Listar Productos del Local","Facturacion", "Salir"};
             menu = (String) JOptionPane.showInputDialog(null, "Seleccione una opción:", "Locales", JOptionPane.DEFAULT_OPTION, null, z, z[0]);
             if (menu.equals(z[0])) {
 
@@ -801,6 +811,17 @@ public class Lab3_CarlosRomero {
                     locales.get(x).getProdutos().get(p).setDescuento(Descuento);
                     String Tipo = JOptionPane.showInputDialog("Ingrese el Tipo de Juguete", "Auto,Muñeca,Para bebé,etc.");
                     ((Juguetes) locales.get(x).getProdutos().get(p)).setTipo(Tipo);
+                }
+            }
+            if(menu.equals(z[4])){
+                if(locales.get(x).getContador()>=5){
+                    String fact="Productos Vendidos\n";
+                    for (Object t : locales.get(x).getVendidos()) {
+                        fact+="" + locales.get(x).getVendidos().indexOf(t) + "" + ") \n" + t + "\n\n";
+                    }
+                    System.out.println(fact);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Este local no ha vendido 5 productos");
                 }
             }
         }

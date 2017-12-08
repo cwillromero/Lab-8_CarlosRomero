@@ -6,7 +6,8 @@ import java.util.ArrayList;
         private int Piso;
         private ArrayList<Productos> Produtos=new ArrayList();
         private String Empleado;
-
+        private int contador=0;
+        private ArrayList vendidos=new ArrayList();
     public Locales() {
     }
 
@@ -48,6 +49,23 @@ import java.util.ArrayList;
         this.Empleado = Empleado;
     }
 
+    public int getContador() {
+        return contador;
+    }
+
+    public void setContador(int contador) {
+        this.contador = contador;
+    }
+
+    public ArrayList getVendidos() {
+        return vendidos;
+    }
+
+    public void setVendidos(ArrayList vendidos) {
+        this.vendidos = vendidos;
+    }
+    
+    
     @Override
     public String toString() {
         String m = "Productos\n";
