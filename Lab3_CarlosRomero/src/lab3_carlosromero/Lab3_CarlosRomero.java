@@ -151,11 +151,11 @@ public class Lab3_CarlosRomero {
             String FechaNacimiento = JOptionPane.showInputDialog("Ingrese Fecha de Nacimiento:", "DD/MM/AAAA");
             personas.get(personas.size() - 1).setFechaNacimiento(FechaNacimiento);
             double Dinero = -1;
-            while(Dinero==-1){
+            while (Dinero == -1) {
                 try {
                     Dinero = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la cantidad de dinero", "0.00"));
                 } catch (Exception e) {
-                    Dinero=-1;
+                    Dinero = -1;
                 }
             }
             ((Clientes) personas.get(personas.size() - 1)).setDinero(Dinero);
@@ -282,11 +282,11 @@ public class Lab3_CarlosRomero {
             }
             if (p.equals(m[6])) {
                 double Dinero = -1;
-                while(Dinero==-1){
+                while (Dinero == -1) {
                     try {
                         Dinero = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la cantidad de dinero", "0.00"));
                     } catch (Exception e) {
-                        Dinero=-1;
+                        Dinero = -1;
                     }
                 }
                 ((Clientes) personas.get(personas.size() - 1)).setDinero(Dinero);
@@ -311,9 +311,33 @@ public class Lab3_CarlosRomero {
                         String[] tipo = {"Empleado", "Cliente"};
                         String Tipo = (String) JOptionPane.showInputDialog(null, "Seleccione el Tipo de Persona:", "Menú Administrativo", JOptionPane.DEFAULT_OPTION, null, tipo, tipo[0]);
                         if (Tipo.equals(tipo[0])) {
-                            Empleados();
+                            int x = 0;
+                            for (int I = 0; I < personas.size(); I++) {
+                                if (personas.get(I) instanceof Empleados) {
+                                    x = x + 1;
+                                }
+                            }
+                            if (x == 0) {
+                                JOptionPane.showMessageDialog(null, "No hay Empleados Agregados");
+                            } else {
+                                Empleados();
+                            }
                         } else {
-                            Clientes();
+                            int x = 0;
+                            for (int I = 0; I < personas.size(); I++) {
+                                if (personas.get(I) instanceof Clientes) {
+                                    x = x + 1;
+                                }
+                            }
+                            if (x == 0) {
+                                JOptionPane.showMessageDialog(null, "No hay Clientes Agregados");
+                            } else {
+                                if ((locales.size() - 1) < 0) {
+                                    JOptionPane.showMessageDialog(null, "No hay Locales Agregados");
+                                } else {
+                                    Clientes();
+                                }
+                            }
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Password Incorrecto!");
@@ -364,11 +388,11 @@ public class Lab3_CarlosRomero {
                     if (p.equals(product[0])) {
                         locales.get(locales.size() - 1).getProdutos().add(new Ropa());
                         double Precio = -1;
-                        while(Precio==-1){
+                        while (Precio == -1) {
                             try {
                                 Precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el Precio", "0.00"));
                             } catch (Exception e) {
-                                Precio=-1;
+                                Precio = -1;
                             }
                         }
                         locales.get(locales.size() - 1).getProdutos().get(locales.get(locales.size() - 1).getProdutos().size() - 1).setPrecio(Precio);
@@ -377,11 +401,11 @@ public class Lab3_CarlosRomero {
                         String Marca = JOptionPane.showInputDialog("Ingrese la marca");
                         locales.get(locales.size() - 1).getProdutos().get(locales.get(locales.size() - 1).getProdutos().size() - 1).setMarca(Marca);
                         double Descuento = -1;
-                        while (Descuento==-1) {
+                        while (Descuento == -1) {
                             try {
                                 Descuento = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el Descuento"));
                             } catch (Exception e) {
-                                Descuento=-1;
+                                Descuento = -1;
                             }
                         }
                         locales.get(locales.size() - 1).getProdutos().get(locales.get(locales.size() - 1).getProdutos().size() - 1).setDescuento(Descuento);
@@ -399,11 +423,11 @@ public class Lab3_CarlosRomero {
                     } else {
                         locales.get(locales.size() - 1).getProdutos().add(new Juguetes());
                         double Precio = -1;
-                        while (Precio==-1) {
+                        while (Precio == -1) {
                             try {
                                 Precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el Precio", "0.00"));
                             } catch (Exception e) {
-                                Precio=-1;
+                                Precio = -1;
                             }
                         }
                         locales.get(locales.size() - 1).getProdutos().get(locales.get(locales.size() - 1).getProdutos().size() - 1).setPrecio(Precio);
@@ -412,11 +436,11 @@ public class Lab3_CarlosRomero {
                         String Marca = JOptionPane.showInputDialog("Ingrese la marca");
                         locales.get(locales.size() - 1).getProdutos().get(locales.get(locales.size() - 1).getProdutos().size() - 1).setMarca(Marca);
                         double Descuento = -1;
-                        while (Descuento==-1) {
+                        while (Descuento == -1) {
                             try {
                                 Descuento = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el Descuento"));
                             } catch (Exception e) {
-                                Descuento=-1;
+                                Descuento = -1;
                             }
                         }
                         locales.get(locales.size() - 1).getProdutos().get(locales.get(locales.size() - 1).getProdutos().size() - 1).setDescuento(Descuento);
@@ -457,49 +481,97 @@ public class Lab3_CarlosRomero {
         int z = -1;
         while (z == -1) {
             try {
-                z = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el cliente al que desea agregar productos"));
+                z = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el cliente:"));
+                if (personas.get(z) instanceof Empleados) {
+                    JOptionPane.showMessageDialog(null, "No es un cliente.");
+                    z = -1;
+                }
             } catch (Exception e) {
                 z = -1;
             }
         }
-        while (personas.get(z).toString().contains("Cliente")) {
-            JOptionPane.showInternalInputDialog(null, "Ese no es un cliente");
-            z = -1;
-            while (z == -1) {
+        String adminitracion="";
+        while (!adminitracion.equals("Salir")) {
+        String[] Y = {"Comprar", "Listar Productos", "Eliminar Productos", "Salir"};
+        adminitracion = (String) JOptionPane.showInputDialog(null, "Elija una opcion:", "Menú Administrativo", JOptionPane.DEFAULT_OPTION, null, Y, Y[0]);
+        
+            if (adminitracion.endsWith(Y[0])) {
+                String m = "________________________________________Locales________________________________________\n";
+                for (Object t : locales) {
+                    m += "" + locales.indexOf(t) + "" + ") \n" + t + "\n\n";
+                }
+                System.out.println(m);
+                int Pos = -1;
+                while (Pos == -1) {
+                    try {
+                        Pos = Integer.parseInt(JOptionPane.showInputDialog("Seleccione el Local donde desea comprar:"));
+                    } catch (Exception e) {
+                        Pos = -1;
+                    }
+                }
+                while (locales.size() < Pos) {
+                    JOptionPane.showMessageDialog(null, "Esa Posicion no existe");
+                    Pos = Integer.parseInt(JOptionPane.showInputDialog("Seleccione el Local donde desea comprar:"));
+                }
+                String M = "Productos del Local " + locales.get(Pos).getNombre() + "\n";
+                for (Object t : locales.get(Pos).getProdutos()) {
+                    M += "" + locales.get(Pos).getProdutos().indexOf(t) + "" + ") \n" + t + "\n\n";
+                }
+                System.out.println(M);
+                int x = -1;
+                while (x == -1) {
+                    try {
+                        x = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el producto que desea comprar:"));
+                    } catch (Exception e) {
+                        x = -1;
+                    }
+                }
+                while (x > locales.get(Pos).getProdutos().size() - 1) {
+                    x = -1;
+                    while (x == -1) {
+                        try {
+                            x = Integer.parseInt(JOptionPane.showInputDialog("Ese producto no existe!\nIngrese el producto que desea comprar:"));
+                        } catch (Exception e) {
+                            x = -1;
+                        }
+                    }
+                }
+                ((Clientes) personas.get(z)).getProductosComprados().add(locales.get(Pos).getProdutos().get(x));
+            }
+        if (adminitracion.endsWith(Y[1])) {
+            String m = "Productos del Cliente\n";
+            for (Object t : ((Clientes) personas.get(z)).getProductosComprados()) {
+                m += "" + ((Clientes) personas.get(z)).getProductosComprados().indexOf(t) + "" + ") \n" + t + "\n\n";
+            }
+            System.out.println(m);
+        }
+        if (adminitracion.equals(Y[2])) {
+            String m = "Productos del Cliente\n";
+            for (Object t : ((Clientes) personas.get(z)).getProductosComprados()) {
+                m += "" + ((Clientes) personas.get(z)).getProductosComprados().indexOf(t) + "" + ") \n" + t + "\n\n";
+            }
+            System.out.println(m);
+            int x = -1;
+            while (x == -1) {
                 try {
-                    z = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el cliente al que desea agregar productos"));
+                    x = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el producto a eliminar:"));
                 } catch (Exception e) {
-                    z = -1;
+                    x = -1;
                 }
             }
-        }
-        String m = "________________________________________Locales________________________________________\n";
-        for (Object t : locales) {
-            m += "" + locales.indexOf(t) + "" + ") \n" + t + "\n\n";
-        }
-        System.out.println(m);
-        int Pos = -1;
-        while (Pos == -1) {
-            try {
-                Pos = Integer.parseInt(JOptionPane.showInputDialog("Seleccione el Local donde desea comprar:"));
-            } catch (Exception e) {
-                Pos = -1;
-            }
-        }
-        while (locales.size() < Pos) {
-            JOptionPane.showMessageDialog(null, "Esa Posicion no existe");
-            Pos = Integer.parseInt(JOptionPane.showInputDialog("Seleccione el Local donde desea comprar:"));
-        }
-        int x = -1;
-        while (x == -1) {
-            try {
-                x = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el producto que desea comprar:"));
-            } catch (Exception e) {
+            while (x > (((Clientes) personas.get(z)).getProductosComprados().size() - 1)) {
                 x = -1;
+                while (x == -1) {
+                    try {
+                        x = Integer.parseInt(JOptionPane.showInputDialog("Ese producto no existe!\nIngrese el producto a eliminar:"));
+                    } catch (Exception e) {
+                        x = -1;
+                    }
+                }
             }
+            ((Clientes) personas.get(z)).getProductosComprados().remove(x);
         }
-        ((Clientes) personas.get(z)).getProductosComprados().add(locales.get(Pos).getProdutos().get(x));
-
+        }
     }
 
     public static void ModificarLocales() {
@@ -550,11 +622,11 @@ public class Lab3_CarlosRomero {
                     if (p.equals(product[0])) {
                         locales.get(x).getProdutos().add(new Ropa());
                         double Precio = -1;
-                        while (Precio==-1) {                            
+                        while (Precio == -1) {
                             try {
                                 Precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el Precio", "0.00"));
                             } catch (Exception e) {
-                                Precio=-1;
+                                Precio = -1;
                             }
                         }
                         locales.get(x).getProdutos().get(locales.get(x).getProdutos().size() - 1).setPrecio(Precio);
@@ -563,11 +635,11 @@ public class Lab3_CarlosRomero {
                         String Marca = JOptionPane.showInputDialog("Ingrese la marca");
                         locales.get(x).getProdutos().get(locales.get(x).getProdutos().size() - 1).setMarca(Marca);
                         double Descuento = -1;
-                        while (Descuento==-1) {                            
+                        while (Descuento == -1) {
                             try {
                                 Descuento = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el Descuento"));
                             } catch (Exception e) {
-                                Descuento=-1;
+                                Descuento = -1;
                             }
                         }
                         locales.get(x).getProdutos().get(locales.get(x).getProdutos().size() - 1).setDescuento(Descuento);
@@ -585,11 +657,11 @@ public class Lab3_CarlosRomero {
                     } else {
                         locales.get(x).getProdutos().add(new Juguetes());
                         double Precio = -1;
-                        while (Precio==-1) {                            
+                        while (Precio == -1) {
                             try {
                                 Precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el Precio", "0.00"));
                             } catch (Exception e) {
-                                Precio=-1;
+                                Precio = -1;
                             }
                         }
                         locales.get(x).getProdutos().get(locales.get(x).getProdutos().size() - 1).setPrecio(Precio);
@@ -598,11 +670,11 @@ public class Lab3_CarlosRomero {
                         String Marca = JOptionPane.showInputDialog("Ingrese la marca");
                         locales.get(x).getProdutos().get(locales.get(x).getProdutos().size() - 1).setMarca(Marca);
                         double Descuento = -1;
-                        while(Descuento==-1){
+                        while (Descuento == -1) {
                             try {
                                 Descuento = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el Descuento"));
                             } catch (Exception e) {
-                                Descuento=-1;
+                                Descuento = -1;
                             }
                         }
                         locales.get(x).getProdutos().get(locales.get(x).getProdutos().size() - 1).setDescuento(Descuento);
@@ -672,11 +744,11 @@ public class Lab3_CarlosRomero {
                 }
                 if (locales.get(x).getProdutos().get(p) instanceof Ropa) {
                     double Precio = -1;
-                    while (Precio==-1) {                        
+                    while (Precio == -1) {
                         try {
                             Precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el Precio", "0.00"));
                         } catch (Exception e) {
-                            Precio=-1;
+                            Precio = -1;
                         }
                     }
                     locales.get(x).getProdutos().get(p).setPrecio(Precio);
@@ -685,11 +757,11 @@ public class Lab3_CarlosRomero {
                     String Marca = JOptionPane.showInputDialog("Ingrese la marca");
                     locales.get(x).getProdutos().get(p).setMarca(Marca);
                     double Descuento = -1;
-                    while (Descuento==-1) {                        
+                    while (Descuento == -1) {
                         try {
                             Descuento = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el Descuento"));
                         } catch (Exception e) {
-                            Descuento=-1;
+                            Descuento = -1;
                         }
                     }
                     locales.get(x).getProdutos().get(p).setDescuento(Descuento);
@@ -706,11 +778,11 @@ public class Lab3_CarlosRomero {
                     ((Ropa) locales.get(x).getProdutos().get(p)).setGenero(Genero);
                 } else {
                     double Precio = -1;
-                    while (Precio==-1) {                        
+                    while (Precio == -1) {
                         try {
                             Precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el Precio", "0.00"));
                         } catch (Exception e) {
-                            Precio=-1;
+                            Precio = -1;
                         }
                     }
                     locales.get(x).getProdutos().get(p).setPrecio(Precio);
@@ -719,11 +791,11 @@ public class Lab3_CarlosRomero {
                     String Marca = JOptionPane.showInputDialog("Ingrese la marca");
                     locales.get(x).getProdutos().get(p).setMarca(Marca);
                     double Descuento = -1;
-                    while (Descuento==-1) {                        
+                    while (Descuento == -1) {
                         try {
                             Descuento = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el Descuento"));
                         } catch (Exception e) {
-                            Descuento=-1;
+                            Descuento = -1;
                         }
                     }
                     locales.get(x).getProdutos().get(p).setDescuento(Descuento);
