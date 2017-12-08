@@ -513,9 +513,11 @@ public class Lab3_CarlosRomero {
                     JOptionPane.showMessageDialog(null, "Esa Posicion no existe");
                     Pos = Integer.parseInt(JOptionPane.showInputDialog("Seleccione el Local donde desea comprar:"));
                 }
+                int cont=0;
                 String M = "Productos del Local " + locales.get(Pos).getNombre() + "\n";
                 for (Object t : locales.get(Pos).getProdutos()) {
-                    M += "" + locales.get(Pos).getProdutos().indexOf(t) + "" + ") \n" + t + "\n\n";
+                    M += "" + cont + "" + ") \n" + t + "\n\n";
+                    cont++;
                 }
                 System.out.println(M);
                 int x = -1;
@@ -536,17 +538,26 @@ public class Lab3_CarlosRomero {
                         }
                     }
                 }
+                double precio=locales.get(Pos).getProdutos().get(x).getPrecio();
+                double dinero=((Clientes) personas.get(z)).getDinero();
+                if(dinero <= precio){
+                    JOptionPane.showMessageDialog(null, "El dinero no ajusta");
+                }else{
                 ((Clientes) personas.get(z)).getProductosComprados().add(locales.get(Pos).getProdutos().get(x));
+                ((Clientes) personas.get(z)).setDinero(((Clientes) personas.get(z)).getDinero()-locales.get(Pos).getProdutos().get(x).getPrecio());
                 locales.get(Pos).setContador(locales.get(Pos).getContador()+1);
                 locales.get(Pos).getVendidos().add(locales.get(Pos).getProdutos().get(x));
+                }
             }
             if (adminitracion.equals(Y[1])) {
                 if ((((Clientes) personas.get(z)).getProductosComprados().size() - 1) < 0) {
                     JOptionPane.showMessageDialog(null, "No ha comprado ");
                 } else {
                     String m = "Productos del Cliente\n";
+                    int cont=0;
                     for (Object t : ((Clientes) personas.get(z)).getProductosComprados()) {
-                        m += "" + ((Clientes) personas.get(z)).getProductosComprados().indexOf(t) + "" + ") \n" + t + "\n\n";
+                        m += "" + cont + "" + ") \n" + t + "\n\n";
+                        cont++;
                     }
                     System.out.println(m);
                 }
@@ -556,8 +567,10 @@ public class Lab3_CarlosRomero {
                     JOptionPane.showMessageDialog(null, "No ha comprado ");
                 } else {
                     String m = "Productos del Cliente\n";
+                    int cont=0;
                     for (Object t : ((Clientes) personas.get(z)).getProductosComprados()) {
-                        m += "" + ((Clientes) personas.get(z)).getProductosComprados().indexOf(t) + "" + ") \n" + t + "\n\n";
+                        m += "" + cont + "" + ") \n" + t + "\n\n";
+                        cont++;
                     }
                     System.out.println(m);
                     int x = -1;
@@ -816,8 +829,10 @@ public class Lab3_CarlosRomero {
             if(menu.equals(z[4])){
                 if(locales.get(x).getContador()>=5){
                     String fact="Productos Vendidos\n";
+                    int cont=0;
                     for (Object t : locales.get(x).getVendidos()) {
-                        fact+="" + locales.get(x).getVendidos().indexOf(t) + "" + ") \n" + t + "\n\n";
+                        fact+="" + cont + "" + ") \n" + t + "\n\n";
+                        cont++;
                     }
                     System.out.println(fact);
                 }else{
