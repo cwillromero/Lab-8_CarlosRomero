@@ -394,7 +394,7 @@ public class Lab3_CarlosRomero {
         }
         String menu = "";
         while (!menu.equals("Salir")) {
-            String[] z = {"Agregar Productos al Local", "Eliminar Productos del Local", "Modificar Productos de Locales", "Salir"};
+            String[] z = {"Agregar Productos al Local", "Eliminar Productos del Local", "Modificar Productos del Local", "Listar Productos del Local", "Salir"};
             menu = (String) JOptionPane.showInputDialog(null, "Seleccione una opción:", "Locales", JOptionPane.DEFAULT_OPTION, null, z, z[0]);
             if (menu.equals(z[0])) {
                 int cant = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de Productos a añadir:"));
@@ -442,13 +442,24 @@ public class Lab3_CarlosRomero {
                     p = Integer.parseInt(JOptionPane.showInputDialog("Ese producto no existe!\nSeleccione el Producto a Eliminar"));
                 }
                 locales.get(x).getProdutos().remove(p);
-                m = "Productos del Local " + locales.get(x).getNombre() + "\n";
+            }
+            if (menu.equals(z[3])) {
+                String m = "Productos del Local " + locales.get(x).getNombre() + "\n";
                 for (Object t : locales.get(x).getProdutos()) {
                     m += "" + locales.get(x).getProdutos().indexOf(t) + "" + ") \n" + t + "\n\n";
                 }
             }
-            if (menu.equals(z[2])) {
-
+            if (menu.equals(z[3])) {
+                String m = "Productos del Local " + locales.get(x).getNombre() + "\n";
+                for (Object t : locales.get(x).getProdutos()) {
+                    m += "" + locales.get(x).getProdutos().indexOf(t) + "" + ") \n" + t + "\n\n";
+                }
+                System.out.println(m);
+                int p = Integer.parseInt(JOptionPane.showInputDialog("Seleccione el Producto a Modificar"));
+                while (p > locales.get(x).getProdutos().size() - 1) {
+                    p = Integer.parseInt(JOptionPane.showInputDialog("Ese producto no existe!\nSeleccione el Producto a Modificar"));
+                }
+                
             }
         }
     }
