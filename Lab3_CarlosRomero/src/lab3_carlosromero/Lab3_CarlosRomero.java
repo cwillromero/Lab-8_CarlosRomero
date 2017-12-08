@@ -448,8 +448,9 @@ public class Lab3_CarlosRomero {
                 for (Object t : locales.get(x).getProdutos()) {
                     m += "" + locales.get(x).getProdutos().indexOf(t) + "" + ") \n" + t + "\n\n";
                 }
+                System.out.println(m);
             }
-            if (menu.equals(z[3])) {
+            if (menu.equals(z[2])) {
                 String m = "Productos del Local " + locales.get(x).getNombre() + "\n";
                 for (Object t : locales.get(x).getProdutos()) {
                     m += "" + locales.get(x).getProdutos().indexOf(t) + "" + ") \n" + t + "\n\n";
@@ -459,7 +460,31 @@ public class Lab3_CarlosRomero {
                 while (p > locales.get(x).getProdutos().size() - 1) {
                     p = Integer.parseInt(JOptionPane.showInputDialog("Ese producto no existe!\nSeleccione el Producto a Modificar"));
                 }
-                
+                if (locales.get(x).getProdutos().get(p) instanceof Ropa) {
+                    double Precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el Precio", "0.00"));
+                    locales.get(x).getProdutos().get(p).setPrecio(Precio);
+                    String Descripcion = JOptionPane.showInputDialog("Ingrese la Descripcion:");
+                    locales.get(x).getProdutos().get(p).setDescripcion(Descripcion);
+                    String Marca = JOptionPane.showInputDialog("Ingrese la marca");
+                    locales.get(x).getProdutos().get(p).setMarca(Marca);
+                    double Descuento = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el Descuento"));
+                    locales.get(x).getProdutos().get(p).setDescuento(Descuento);
+                    int Talla = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la talla de la Ropa:"));
+                    ((Ropa) locales.get(x).getProdutos().get(p)).setTalla(Talla);
+                    String Genero = JOptionPane.showInputDialog("Ingrese para qué género es la ropa:");
+                    ((Ropa) locales.get(x).getProdutos().get(p)).setGenero(Genero);
+                } else {
+                    double Precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el Precio", "0.00"));
+                    locales.get(x).getProdutos().get(p).setPrecio(Precio);
+                    String Descripcion = JOptionPane.showInputDialog("Ingrese la Descripcion:");
+                    locales.get(x).getProdutos().get(p).setDescripcion(Descripcion);
+                    String Marca = JOptionPane.showInputDialog("Ingrese la marca");
+                    locales.get(x).getProdutos().get(p).setMarca(Marca);
+                    double Descuento = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el Descuento"));
+                    locales.get(x).getProdutos().get(p).setDescuento(Descuento);
+                    String Tipo = JOptionPane.showInputDialog("Ingrese el Tipo de Juguete", "Auto,Muñeca,Para bebé,etc.");
+                    ((Juguetes) locales.get(x).getProdutos().get(p)).setTipo(Tipo);
+                }
             }
         }
     }
